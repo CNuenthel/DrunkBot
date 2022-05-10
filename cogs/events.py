@@ -1,6 +1,6 @@
 
 from discord.ext import commands
-import discord
+
 
 class Events(commands.Cog):
 
@@ -21,6 +21,7 @@ class Events(commands.Cog):
 
         if message.content.lower() == "bruh":
             await message.channel.send("Bruh...")
+
 
 def setup(bot):
     bot.add_cog(Events(bot))

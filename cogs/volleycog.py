@@ -3,6 +3,7 @@ import datetime as dt
 import json
 import discord
 
+
 class VolleyballDates:
     def __init__(self):
         self.dates: dict = {}
@@ -46,7 +47,6 @@ class VolleyballDates:
         for item in self.dates:
             if item > dt.datetime.now():
                 return item, self.dates[item]
-                break
 
 
 class Volleycog(commands.Cog):
@@ -59,14 +59,24 @@ class Volleycog(commands.Cog):
     async def on_ready(self):
         print("VolleyCog is Ready!")
 
-    @commands.command()
+    @commands.command(aliases=["vb"])
     async def volleyball(self, ctx):
         date, match = self.vb_dates.get_next_date()
-        embed=discord.Embed(
+        time_format = "%H:%M"
+
+        embed = discord.Embed(
             title="Next Match", 
-            description=f"{date.month}-{date.day}\nTime: {date.time()}\nCourt: {match['court']}\nAgainst: {match['opp']}\n", 
+            description=f"Date: {date.month}/{date.day}/{date.year}\n"
+                        f"Time: {date.time().strftime(time_format)} PM\n"
+                        f"Court: {match['court']}\n"
+                        f"Against: {match['opp']}",
             color=discord.Color.blurple())
+        embed.set_author(
+            name="VolleyCog",
+            icon_url="https://cdn-icons-png.flaticon.com/512/2761/2761875.png"),
+
         await ctx.send(embed=embed)
-    
+
+
 def setup(bot):
     bot.add_cog(Volleycog(bot))
