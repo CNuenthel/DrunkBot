@@ -3,11 +3,9 @@ from discord.ext import commands
 import discord
 import os
 
-intents = discord.Intents.default()
-intents.members = True
 
 # Bot instance
-bot = commands.Bot(command_prefix='.', intents=intents)
+bot = commands.Bot(command_prefix='.')
 
 with open("config.json", "r") as f:
     config = json.load(f)
