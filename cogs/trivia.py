@@ -82,11 +82,11 @@ class Triviacog(commands.Cog):
         emojis = ["🧠", "🍆", "🎲"]
         await trivia_start_msg.add_reaction(random.choice(emojis))
 
-        def check(*args):
-            print(args)
+        def check(reaction, member):
+            pass
 
         try:
-            reaction, user = await self.bot.wait_for(event='reaction_add', check=check, timeout=60.0)
+            reaction, member = await self.bot.wait_for(event='reaction_add', check=check, timeout=60.0)
         except asyncio.TimeoutError:
             pass
 
