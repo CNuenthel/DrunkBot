@@ -2,12 +2,13 @@ import json
 from discord.ext import commands
 import discord
 import os
+import pretty_help
 
 intents = discord.Intents.default()
 intents.members = True
 
 # Bot instance
-bot = commands.Bot(command_prefix='.', intents=intents)
+bot = commands.Bot(command_prefix='.', intents=intents, help_command=pretty_help.PrettyHelp())
 
 with open("config.json", "r") as f:
     config = json.load(f)
@@ -15,6 +16,7 @@ with open("config.json", "r") as f:
 
 @bot.command()
 async def load(ctx, extension):
+    """ Loads a cog """
     try:
         bot.load_extension(f"cogs.{extension.lower()}")
         await ctx.send(f"{extension} has been loaded! 😌")
@@ -24,6 +26,7 @@ async def load(ctx, extension):
 
 @bot.command()
 async def unload(ctx, extension):
+    """ Unloads a cog """
     try:
         bot.unload_extension(f"cogs.{extension}")
         await ctx.send(f"{extension} has been removed 😌")
