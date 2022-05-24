@@ -49,7 +49,7 @@ class VolleyballDates:
                 return item, self.dates[item]
 
 
-class Volleycog(commands.Cog):
+class Volleyball(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
@@ -57,7 +57,7 @@ class Volleycog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print("VolleyCog is Ready!")
+        print("VolleyBot is Ready!")
 
     @commands.command(aliases=["vb"])
     async def volleyball(self, ctx):
@@ -72,11 +72,11 @@ class Volleycog(commands.Cog):
                         f"Against: {match['opp']}",
             color=discord.Color.blurple())
         embed.set_author(
-            name="VolleyCog",
+            name="VolleyBot",
             icon_url="https://cdn-icons-png.flaticon.com/512/2761/2761875.png"),
 
         await ctx.send(embed=embed)
 
 
 def setup(bot):
-    bot.add_cog(Volleycog(bot))
+    bot.add_cog(Volleyball(bot))
