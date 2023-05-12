@@ -41,7 +41,8 @@ async def on_ready():
 # Display volleyball game information from vb data
 @bot.command(aliases=["vb"])
 async def volleyball(ctx):
-    today = dt.date.today()
+    today = dt.date(2023, 5, 22)#dt.date.today()
+    print(today)
     closest_date = None
     closest_vb_date = None
 
