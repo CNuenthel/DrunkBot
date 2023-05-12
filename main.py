@@ -22,27 +22,13 @@ async def on_ready():
     print("Drunkbot Drunk and Ready for Drinking!")
 
 
-# # Message event responses
-# @bot.event
-# async def on_message(message):
-#     if "terry" in message.content.lower():
-#         await message.channel.send("Oh you mean Tatters?")
-#
-#     if message.content.lower() == "good morning kanye":
-#         await message.channel.send("Shut the fuck up.")
-#
-#     if message.content.lower() == "bruh":
-#         await message.channel.send("Bruh...")
-
-
 # ----------------------------------------------------------------------------------------------------------------------
 # VOLLEYBALL COMMANDS
 
 # Display volleyball game information from vb data
 @bot.command(aliases=["vb"])
 async def volleyball(ctx):
-    today = dt.date(2023, 5, 22)#dt.date.today()
-    print(today)
+    today =dt.date.today()
     closest_date = None
     closest_vb_date = None
 
@@ -68,6 +54,22 @@ async def volleyball(ctx):
         icon_url="https://cdn-icons-png.flaticon.com/512/2761/2761875.png"),
 
     await ctx.send(embed=embed)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# EVENTS
+
+# # Message event responses
+# @bot.event
+# async def on_message(message):
+#     if "terry" in message.content.lower():
+#         await message.channel.send("Oh you mean Tatters?")
+#
+#     if message.content.lower() == "good morning kanye":
+#         await message.channel.send("Shut the fuck up.")
+#
+#     if message.content.lower() == "bruh":
+#         await message.channel.send("Bruh...")
 
 # Run bot
 bot.run(config["token"])
