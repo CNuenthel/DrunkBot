@@ -5,7 +5,7 @@ import os
 
 
 # Bot instance
-bot = commands.Bot(command_prefix='.')
+bot = commands.Bot(command_prefix='.', intents=discord.Intents.all())
 
 with open("config.json", "r") as f:
     config = json.load(f)
