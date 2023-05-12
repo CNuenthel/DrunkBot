@@ -1,11 +1,11 @@
-from discord.ext import commands
 import datetime as dt
 import json
-import discord
+
 
 VB_DATES = []
 
 
+# Create VB Model base class
 class VBModel:
     def __init__(self, date, court, time, team):
         self.date = date
@@ -14,9 +14,12 @@ class VBModel:
         self.team = team
 
 
+# Load vb data
 with open("data/volleyball_data_2023.json", "r") as f:
     data = json.load(f)
 
+
+# Parse saved vb data to vb objects
 for item in data:
     line = data[item]
     line_date = [int(value) for value in line["date"]]
