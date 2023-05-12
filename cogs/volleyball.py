@@ -3,57 +3,31 @@ import datetime as dt
 import json
 import discord
 
+VB_DATES = []
 
-class VolleyballDates:
-    def __init__(self):
-        self.dates: dict = {}
-        self.load_dates()
-        
-    def load_dates(self):
-        with open("22_VB_sched.json", "r") as f:
-            data = json.load(f)
 
-        for item in data:
-            line = data[item]
-            date = data[item]["date"]
-            time = data[item]["time"]
-            time_h = data[item]["time"][0]
-            time_m = data[item]["time"][1]
-            
-            key = dt.datetime(date[0], date[1], date[2], time_h, time_m)
-            self.dates[key] = {
-                "time": time,
-                "court": line["court"],
-                "opp": line["opp"]
-            }
-            
-    def add_date(self, year: int, month: int, day: int, hour: int, min: int, court: str, opposing_team: str):
-        self.dates[dt.datetime(year, month, day, hour, min)] = {
-            "time": [hour, min],
-            "court": court.title(),
-            "opp": opposing_team.title()
-        }
-        return self.dates[dt.datetime(year, month, day, hour, min)]
+class VBModel:
+    def __init__(self, date, court, time, team):
+        self.date = date
+        self.court = court
+        self.time = time
+        self.team = team
 
-    def remove_date(self, year: int, month: int, day: int):
-        removal = self.dates[dt.date(year, month, day)]
-        self.dates.pop(dt.date(year, month, day))
-        return removal
 
-    def get_all_dates(self):
-        return self.dates
+with open("../volleyball_data_2023.json", "r") as f:
+    data = json.load(f)
 
-    def get_next_date(self):
-        for item in self.dates:
-            if item > dt.datetime.now():
-                return item, self.dates[item]
+for item in data:
+    line = data[item]
+    line_date = [int(value) for value in line["date"]]
+    VB_DATES.append(VBModel(dt.date(line_date[0], line_date[1], line_date[2]), line["court"], line["time"], line["team"]))
 
 
 class Volleyball(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.vb_dates = VolleyballDates()
+        self.vb_dates = None
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -61,15 +35,26 @@ class Volleyball(commands.Cog):
 
     @commands.command(aliases=["vb"])
     async def volleyball(self, ctx):
-        date, match = self.vb_dates.get_next_date()
-        time_format = "%H:%M"
+        today = dt.date.today()
+        closest_date = None
+        closest_vb_date = None
+
+        for vb_date in VB_DATES:
+            compare_date = vb_date.date
+
+            if compare_date < today:
+                continue
+
+            if closest_date is None or compare_date < closest_date:
+                closest_date = compare_date
+                closest_vb_date = vb_date
 
         embed = discord.Embed(
             title="Next Match", 
-            description=f"Date: {date.month}/{date.day}/{date.year}\n"
-                        f"Time: {date.time().strftime(time_format)} PM\n"
-                        f"Court: {match['court']}\n"
-                        f"Against: {match['opp']}",
+            description=f"Date: {closest_vb_date.date}\n"
+                        f"Time: {closest_vb_date.time} PM\n"
+                        f"Court: {closest_vb_date.court}\n"
+                        f"Against: {closest_vb_date.team}",
             color=discord.Color.blurple())
         embed.set_author(
             name="VolleyBot",

@@ -1,0 +1,72 @@
+{
+  "0": {
+    "date": [
+      "2023",
+      "05",
+      "17"
+    ],
+    "court": 5,
+    "time": "7:15",
+    "team": "Digging Doves"
+  },
+  "1": {
+    "date": [
+      "2023",
+      "05",
+      "24"
+    ],
+    "court": 6,
+    "time": "6:10",
+    "team": "Frank Lloyd Spike"
+  },
+  "2": {
+    "date": [
+      "2023",
+      "05",
+      "31"
+    ],
+    "court": 5,
+    "time": "8:20",
+    "team": "Sets With The Lights On"
+  },
+  "3": {
+    "date": [
+      "2023",
+      "06",
+      "07"
+    ],
+    "court": 5,
+    "time": "6:10",
+    "team": "The Bobby Pins"
+  },
+  "4": {
+    "date": [
+      "2023",
+      "06",
+      "14"
+    ],
+    "court": 5,
+    "time": "7:15",
+    "team": "One Hit Wonder"
+  },
+  "5": {
+    "date": [
+      "2023",
+      "06",
+      "21"
+    ],
+    "court": 6,
+    "time": "7:15",
+    "team": "UNDeniable"
+  },
+  "6": {
+    "date": [
+      "2023",
+      "06",
+      "28"
+    ],
+    "court": 5,
+    "time": "7:15",
+    "team": "Yung Professionals"
+  }
+}
