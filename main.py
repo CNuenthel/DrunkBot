@@ -26,34 +26,34 @@ async def on_ready():
 # VOLLEYBALL COMMANDS
 
 # Display volleyball game information from vb data
-@bot.command(aliases=["vb"])
-async def volleyball(ctx):
-    today =dt.date.today()
-    closest_date = None
-    closest_vb_date = None
-
-    for vb_date in VB_DATES:
-        compare_date = vb_date.date
-
-        if compare_date < today:
-            continue
-
-        if closest_date is None or compare_date < closest_date:
-            closest_date = compare_date
-            closest_vb_date = vb_date
-
-    embed = discord.Embed(
-        title="Next Match",
-        description=f"Date: {closest_vb_date.date}\n"
-                    f"Time: {closest_vb_date.time} PM\n"
-                    f"Court: {closest_vb_date.court}\n"
-                    f"Against: {closest_vb_date.team}",
-        color=discord.Color.blurple())
-    embed.set_author(
-        name="VolleyBot",
-        icon_url="https://cdn-icons-png.flaticon.com/512/2761/2761875.png"),
-
-    await ctx.send(embed=embed)
+# @bot.command(aliases=["vb"])
+# async def volleyball(ctx):
+#     today =dt.date.today()
+#     closest_date = None
+#     closest_vb_date = None
+#
+#     for vb_date in VB_DATES:
+#         compare_date = vb_date.date
+#
+#         if compare_date < today:
+#             continue
+#
+#         if closest_date is None or compare_date < closest_date:
+#             closest_date = compare_date
+#             closest_vb_date = vb_date
+#
+#     embed = discord.Embed(
+#         title="Next Match",
+#         description=f"Date: {closest_vb_date.date}\n"
+#                     f"Time: {closest_vb_date.time} PM\n"
+#                     f"Court: {closest_vb_date.court}\n"
+#                     f"Against: {closest_vb_date.team}",
+#         color=discord.Color.blurple())
+#     embed.set_author(
+#         name="VolleyBot",
+#         icon_url="https://cdn-icons-png.flaticon.com/512/2761/2761875.png"),
+#
+#     await ctx.send(embed=embed)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
